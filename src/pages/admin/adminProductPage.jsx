@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { CiCirclePlus } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminProductPage() {
   const [products, setProducts] = useState([]);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     axios
       .get(import.meta.env.VITE_API_URL + "/api/products")
@@ -53,6 +54,7 @@ export default function AdminProductPage() {
                 <th className="px-5 py-4 font-semibold">Product Name</th>
                 <th className="px-5 py-4 font-semibold">Price</th>
                 <th className="px-5 py-4 font-semibold">Label Price</th>
+                <th className="px-5 py-4 font-semibold">Stock</th>
                 <th className="px-5 py-4 font-semibold">Category</th>
                 <th className="px-5 py-4 font-semibold text-center">Actions</th>
               </tr>
@@ -107,6 +109,12 @@ export default function AdminProductPage() {
                     </td>
 
                     <td className="px-5 py-4">
+                      <span className="text-secondary/80">
+                        {item.stock}
+                      </span>
+                    </td>
+
+                    <td className="px-5 py-4">
                       <span className="inline-flex items-center rounded-full border border-secondary/10 bg-primary/40 px-3 py-1 text-sm text-secondary">
                         {item.category}
                       </span>
@@ -123,7 +131,11 @@ export default function AdminProductPage() {
                           <RiDeleteBin5Line className="text-lg text-secondary/70 hover:text-red-600 transition" />
                         </button>
 
-                        <button
+                        <button onClick={()=>{
+                          navigate("/admin/update-product", {
+                            state : item
+                          })
+                        }}
                           type="button"
                           className="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-secondary/10 bg-white/80 shadow-sm
                                      hover:border-accent/30 hover:bg-accent/10 transition"

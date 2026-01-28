@@ -5,6 +5,7 @@ import { BiBox } from "react-icons/bi";
 import { HiOutlineUsers } from "react-icons/hi";
 import AdminProductPage from "./admin/adminProductPage";
 import AddProductPage from "./admin/adminAddNewProduct";
+import UpdateProductPage from "./admin/adminUpdateProduct";
 
 
 
@@ -41,6 +42,7 @@ export default function AdminPage() {
             <Route path="/products" element={<AdminProductPage/>} />
             <Route path="/orders" element={<h1>Orders</h1>} />
             <Route path="/add-product" element={<AddProductPage/>} />
+            <Route path="/update-product" element={<UpdateProductPage/>}/>
           </Routes>
         </div>
       </div>
