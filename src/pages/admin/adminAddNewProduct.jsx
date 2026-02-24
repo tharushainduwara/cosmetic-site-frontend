@@ -14,48 +14,49 @@ export default function AddProductPage() {
   const [labelPrice, setLabelPrice] = useState(0);
   const [category, setCategory] = useState("cream");
   const [stock, setStock] = useState(0);
-  
-  const navigate = useNavigate()
 
-  async function addProduct(){
+  const navigate = useNavigate();
+
+  async function addProduct() {
     const token = localStorage.getItem("token");
-    if(token == null){
+    if (token == null) {
       navigate("/login");
-      return
+      return;
     }
-    
-    const promises = []
-    for(let i=0; i<images.length; i++){
-      
-      promises[i] = mediaUpload(images[i])
 
+    const promises = [];
+    for (let i = 0; i < images.length; i++) {
+      promises[i] = mediaUpload(images[i]);
     }
-    try{
-      const urls =  await Promise.all(promises)
-      const alternativeNames = altNames.split(",")
-      
+    try {
+      const urls = await Promise.all(promises);
+      const alternativeNames = altNames.split(",");
+
       const product = {
-        productID : productId,
-        name : name,
-        altNames : alternativeNames,
-        description : description,
-        images : urls,
-        price : price,
-        labelPrice : labelPrice,
-        category : category,
-        stock : stock
-      }
+        productID: productId,
+        name: name,
+        altNames: alternativeNames,
+        description: description,
+        images: urls,
+        price: price,
+        labelPrice: labelPrice,
+        category: category,
+        stock: stock,
+      };
 
-      await axios.post(import.meta.env.VITE_API_URL + "/api/products", product,{
-        headers : {
-          Authorization : "Bearer " +token
+      await axios.post(
+        import.meta.env.VITE_API_URL + "/api/products",
+        product,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
-      })
-      toast.success("Product added successfully")
-      navigate("/admin/products")  
-    
-    }catch{
-      toast.error("An error occured")
+      );
+      toast.success("Product added successfully");
+      navigate("/admin/products");
+    } catch {
+      toast.error("An error occured");
     }
   }
 
@@ -222,9 +223,11 @@ export default function AddProductPage() {
                   className="w-full rounded-xl border border-secondary/15 bg-white/70 px-3.5 py-2.5 text-secondary outline-none
                              focus:ring-2 focus:ring-accent/35 focus:border-accent/40 transition"
                 >
-                  <option value="cream">Cream</option>
-                  <option value="lotion">Lotion</option>
-                  <option value="serum">Serum</option>
+                  <option value="Cream">Cream</option>
+                  <option value="Lotion">Lotion</option>
+                  <option value="Serum">Serum</option>
+                  <option value="Makeup">Makeup</option>
+                  <option value="Skincare">Skincare</option>
                 </select>
               </div>
 
@@ -246,7 +249,8 @@ export default function AddProductPage() {
             </div>
             {/* Footer */}
             <div className="mt-6 flex justify-end gap-[20px]">
-              <button onClick={addProduct}
+              <button
+                onClick={addProduct}
                 type="button"
                 className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-2.5 text-sm font-medium text-primary
                shadow-sm hover:opacity-95 active:opacity-90 transition"
@@ -254,7 +258,8 @@ export default function AddProductPage() {
                 Save Product
               </button>
 
-              <button onClick={()=>navigate("/admin/products")}
+              <button
+                onClick={() => navigate("/admin/products")}
                 type="button"
                 className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-2.5 text-sm font-medium text-primary
                shadow-sm hover:opacity-95 active:opacity-90 transition"

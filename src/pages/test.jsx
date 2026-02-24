@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import mediaUpload from "../utils/mediaUpload";
 
@@ -10,10 +9,7 @@ export default function TestPage() {
     const link = await mediaUpload(file)
     console.log(link);
 
-
-
   }
-
 
 
   return (
