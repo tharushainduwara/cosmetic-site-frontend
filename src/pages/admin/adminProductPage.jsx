@@ -33,7 +33,7 @@ function ProductDeleteConfirm(props) {
 
   return (
     <div className="flex justify-center items-center fixed left-0 top-0 w-full h-screen bg-[#00000050] z-[100]">
-      <div className=" bg-primary gap-[20px] flex flex-col justify-center items-center w-[500px] h-[200px] bg-white relative rounded-2xl border-2 border-accent">
+      <div className=" bg-primary gap-[20px] flex flex-col justify-center items-center w-[80%] sm:w-[500px] h-[200px] bg-white relative rounded-2xl border-2 border-accent">
         <button
           onClick={close}
           className="absolute right-[-40px] top-[-40px] w-[30px] h-[30px] bg-red-500 rounded-full text-white flex justify-center items-center border border-red-600 hover:bg-white hover:text-red-600"
@@ -118,10 +118,80 @@ export default function AdminProductPage() {
         </div>
       </div>
 
+      {/* Mobile Product Cards */}
+      <div className="sm:hidden flex flex-col gap-4 p-4">
+        {products.map((item) => {
+          return (
+            <div
+              key={item.productID}
+              className="bg-white rounded-xl border border-secondary/10 p-4 shadow-sm"
+            >
+              <div className="flex gap-4 items-center font-semibold">
+                <img
+                  src={item.images[0]}
+                  className="w-16 h-16 rounded-lg object-cover"
+                />
+
+                <div className="flex flex-col flex-1">
+                  <span className="font text-secondary">
+                    {item.name}
+                  </span>
+
+                  <span className="text-xs text-secondary/60">
+                    ID: {item.productID}
+                  </span>
+
+                  <span className="text-sm text-secondary/70 line-through">
+                    LKR {item.labelPrice}
+                  </span>
+
+                  <span className="text-sm text-secondary">
+                    LKR {item.price}
+                  </span>
+
+                  <span className="text-xs text-secondary/60">
+                    Stock: {item.stock}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-xs bg-primary/40 px-3 py-1 rounded-full">
+                  {item.category}
+                </span>
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      setProductToDelete(item.productID);
+                      setIsDeleteConfirmVisible(true);
+                    }}
+                    className="h-9 w-9 flex items-center justify-center rounded-lg border border-secondary/10 bg-white/80 shadow-sm hover:border-red-200 hover:bg-red-50 transition"
+                  >
+                    <RiDeleteBin5Line className="text-lg text-secondary/70 hover:text-red-600 transition" />
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      navigate("/admin/update-product", {
+                        state: item,
+                      });
+                    }}
+                    className="h-9 w-9 flex items-center justify-center rounded-lg border border-secondary/10 bg-white/80 shadow-sm hover:border-accent/30 hover:bg-accent/10 transition"
+                  >
+                    <FiEdit className="text-lg text-secondary/70 hover:text-accent transition"/>
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
       {/* Table Card */}
       <div className="rounded-2xl border border-secondary/10 bg-white/70 backdrop-blur-xl shadow-[0_20px_60px_-35px_rgba(0,0,0,0.35)] overflow-hidden">
         {/* Scroll wrapper */}
-        <div className="w-full overflow-x-auto">
+        <div className="hidden sm:block w-full overflow-x-auto">
           {isLoading ? (
             <Loader />
           ) : (
@@ -236,24 +306,16 @@ export default function AdminProductPage() {
             </table>
           )}
         </div>
-
-        {/* Footer */}
-        <div className="flex items-center justify-between px-5 py-4 text-sm text-secondary/70 border-t border-secondary/10 bg-white/60">
-          <span>
-            Showing{" "}
-            <span className="font-semibold text-secondary">
-              {products.length}
-            </span>{" "}
-            product(s)
-          </span>
-        </div>
       </div>
+
       <Link
         to="/admin/add-product"
-        className="fixed right-[50px] bottom-[50px] text-5xl hover:text-accent"
+        className="fixed bottom-[30px] text-5xl hover:text-accent"
       >
         <CiCirclePlus />
       </Link>
+
+
     </div>
   );
 }
