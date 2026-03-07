@@ -205,9 +205,7 @@ export default function AdminProductPage() {
                   <th className="px-5 py-4 font-semibold">Label Price</th>
                   <th className="px-5 py-4 font-semibold">Stock</th>
                   <th className="px-5 py-4 font-semibold">Category</th>
-                  <th className="px-5 py-4 font-semibold text-center">
-                    Actions
-                  </th>
+                  <th className="px-5 py-4 font-semibold">Actions</th>
                 </tr>
               </thead>
 
@@ -270,7 +268,7 @@ export default function AdminProductPage() {
                       </td>
 
                       <td className="px-5 py-4">
-                        <div className="flex flex-row gap-2 justify-center items-center">
+                        <div className="flex flex-row gap-2">
                           <button
                             onClick={() => {
                               setProductToDelete(item.productID);

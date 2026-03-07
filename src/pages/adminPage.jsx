@@ -10,6 +10,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import AdminProductPage from "./admin/adminProductPage";
 import AddProductPage from "./admin/adminAddNewProduct";
 import UpdateProductPage from "./admin/adminUpdateProduct";
+import AdminOrdersPage from "./admin/adminOrdersPage";
 
 export default function AdminPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -82,7 +83,7 @@ export default function AdminPage() {
           <Routes path="/">
             <Route path="/" element={<h1>Dashboard</h1>} />
             <Route path="/products" element={<AdminProductPage />} />
-            <Route path="/orders" element={<h1>Orders</h1>} />
+            <Route path="/orders" element={<AdminOrdersPage/>} />
             <Route path="/add-product" element={<AddProductPage />} />
             <Route path="/update-product" element={<UpdateProductPage />} />
           </Routes>

@@ -1,11 +1,14 @@
 import { BiTrash } from "react-icons/bi";
 import { CiCircleChevUp, CiCircleChevDown } from "react-icons/ci";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function CheckoutPage() {
   const location = useLocation();
   const [cart, setCart] = useState(location.state);
+  const navigate = useNavigate();
 
   function getTotal() {
     let total = 0;
@@ -15,15 +18,55 @@ export default function CheckoutPage() {
     return total;
   }
 
+  async function purchaseCart() {
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      toast.error("Please login to place order");
+      navigate("/login");
+      return;
+    }
+    try {
+      const items = [];
+      for (let i = 0; i < cart.length; i++) {
+        items.push({
+          productID: cart[i].productID,
+          quantity: cart[i].quantity,
+        });
+      }
+
+      await axios.post(
+        import.meta.env.VITE_API_URL + "/api/orders",
+        {
+          address: "No 66, Colombo",
+          items: items,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      toast.success("Order placed successfully");
+      
+    } catch (error) {
+      toast.error("Failed to place order");
+      console.error(error);
+
+      //if error is 400
+      if (error.response && error.response.status == 400) {
+        toast.error(error.response.data.message);
+      }
+    }
+  }
+
   return (
     <div className="w-full min-h-[calc(100vh-80px)] bg-primary flex flex-col pt-6 items-center relative overflow-hidden px-4">
-
       {/* Premium background glow */}
-      <div className="pointer-events-none absolute -top-36 -right-36 h-80 w-80 rounded-full bg-accent/20 blur-3xl"/>
-      <div className="pointer-events-none absolute -bottom-36 -left-36 h-80 w-80 rounded-full bg-secondary/10 blur-3xl"/>
+      <div className="pointer-events-none absolute -top-36 -right-36 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-36 -left-36 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />
 
       <div className="w-full max-w-3xl flex flex-col gap-5">
-
         {/* Cart Items */}
         {cart.map((item, index) => (
           <div
@@ -39,11 +82,8 @@ export default function CheckoutPage() {
             <button
               className="absolute top-2 right-2 text-accent text-2xl rounded-full
                          hover:bg-accent hover:text-white p-1 font-bold transition z-10"
-            onClick={
-                ()=>{
-                    
-                }
-            }>
+              onClick={() => {}}
+            >
               <BiTrash />
             </button>
 
@@ -58,7 +98,9 @@ export default function CheckoutPage() {
               <h1 className="font-semibold text-lg text-secondary leading-tight">
                 {item.name}
               </h1>
-              <span className="text-sm text-secondary/60">{item.productID}</span>
+              <span className="text-sm text-secondary/60">
+                {item.productID}
+              </span>
             </div>
 
             {/* Quantity Controls */}
@@ -111,6 +153,7 @@ export default function CheckoutPage() {
             className="w-full sm:w-auto bg-accent text-white px-6 py-3 rounded-xl
                        font-semibold tracking-wide text-center shadow-md
                        hover:bg-accent/85 transition"
+            onClick={purchaseCart}
           >
             Order
           </button>
@@ -121,7 +164,6 @@ export default function CheckoutPage() {
             </span>
           </div>
         </div>
-
       </div>
     </div>
   );
