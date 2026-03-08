@@ -9,6 +9,8 @@ export default function CheckoutPage() {
   const location = useLocation();
   const [cart, setCart] = useState(location.state);
   const navigate = useNavigate();
+  const [address, setAddress] = useState("");
+  const [name, setName] = useState("");
 
   function getTotal() {
     let total = 0;
@@ -37,7 +39,8 @@ export default function CheckoutPage() {
       await axios.post(
         import.meta.env.VITE_API_URL + "/api/orders",
         {
-          address: "No 66, Colombo",
+          address: address,
+          customerName: name==""?null:name,
           items: items,
         },
         {
@@ -48,7 +51,6 @@ export default function CheckoutPage() {
       );
 
       toast.success("Order placed successfully");
-      
     } catch (error) {
       toast.error("Failed to place order");
       console.error(error);
@@ -142,11 +144,45 @@ export default function CheckoutPage() {
           </div>
         ))}
 
+        {/* Address/CustomerName Section */}
+        <div
+          className="w-full rounded-2xl border border-white/25
+                     bg-white/10 backdrop-blur-xl 
+                     flex flex-col relative items-center gap-4 p-4
+                     shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
+        >
+          <div className="w-full h-full flex justify-center items-center p-4">
+            <label htmlFor="address" className="text-sm text-secondary mr-15">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full h-[50px]  text-center  border border-secondary rounded-md px-3"
+            />
+          </div>
+
+          <div className="w-full h-full flex justify-center items-center p-4">
+            <label htmlFor="address" className="text-sm text-secondary mr-2">
+              Shipping Address
+            </label>
+            <textarea
+              type="text"
+              id="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="w-full h-[150px]  text-center border border-secondary rounded-md px-3"
+            />
+          </div>
+        </div>
+
         {/* Order/Total Section */}
         <div
           className="w-full rounded-2xl border border-white/25
                      bg-white/10 backdrop-blur-xl
-                     flex flex-col sm:flex-row justify-between items-center gap-4 p-4
+                     flex flex-col flex-col-reverse sm:flex-row justify-between items-center gap-4 p-4
                      shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
         >
           <button

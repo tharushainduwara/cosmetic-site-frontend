@@ -62,7 +62,7 @@ export default function OrderModal({
           </div>
           <div>
             <p className="text-xs text-secondary/60">Address</p>
-            <p className="text-secondary">{selectedOrder.address}</p>
+            <p className="text-secondary whitespace-normal break-words">{selectedOrder.address}</p>
           </div>
         </div>
 

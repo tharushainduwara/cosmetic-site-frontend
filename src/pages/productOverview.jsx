@@ -40,13 +40,16 @@ export default function ProductOverview() {
       {status == "success" && (
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
           <div
-            className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8
+            className="w-full flex flex-col lg:flex-row gap-8
                        rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl
                        shadow-[0_18px_60px_rgba(0,0,0,0.18)] overflow-hidden"
           >
-            {/* Left: Gallery */}
-            <div className="w-full flex justify-center items-center p-5 sm:p-8">
-              <div className="w-full max-w-xl">
+            {/* Left: Gallery */}      
+            <h1 className="absolute p-8 text-2xl sm:text-3xl font-semibold tracking-tight lg:hidden">
+              {product.name}
+            </h1>
+            <div className="w-full flex justify-center items-center p-5 sm:p-8" >             
+              <div className="w-full max-w-xl relative p-15 flex justify-center items-center">
                 <ImageSlider images={product.images} />
               </div>
             </div>

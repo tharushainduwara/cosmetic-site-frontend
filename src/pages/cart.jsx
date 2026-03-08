@@ -9,13 +9,11 @@ export default function CartPage() {
 
   return (
     <div className="w-full min-h-[calc(100vh-80px)] bg-primary flex flex-col pt-6 items-center relative overflow-hidden px-4">
-
       {/* Premium background glow */}
-      <div className="pointer-events-none absolute -top-36 -right-36 h-80 w-80 rounded-full bg-accent/20 blur-3xl"/>
-      <div className="pointer-events-none absolute -bottom-36 -left-36 h-80 w-80 rounded-full bg-secondary/10 blur-3xl"/>
+      <div className="pointer-events-none absolute -top-36 -right-36 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-36 -left-36 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />
 
       <div className="w-full max-w-3xl flex flex-col gap-5">
-
         {/* Cart Items */}
         {cart.map((item, index) => (
           <div
@@ -27,7 +25,6 @@ export default function CartPage() {
                        hover:shadow-[0_15px_45px_rgba(0,0,0,0.22)]
                        transition-all duration-300"
           >
-
             {/* Remove Button */}
             <button
               className="absolute top-2 right-2 text-accent text-2xl rounded-full
@@ -51,7 +48,9 @@ export default function CartPage() {
               <h1 className="font-semibold text-lg text-secondary leading-tight">
                 {item.name}
               </h1>
-              <span className="text-sm text-secondary/60">{item.productID}</span>
+              <span className="text-sm text-secondary/60">
+                {item.productID}
+              </span>
             </div>
 
             {/* Quantity Controls */}
@@ -93,7 +92,7 @@ export default function CartPage() {
         <div
           className="w-full rounded-2xl border border-white/25
                      bg-white/10 backdrop-blur-xl
-                     flex flex-col sm:flex-row justify-between items-center gap-4 p-4
+                     flex flex-col flex-col-reverse sm:flex-row justify-between items-center gap-4 p-4
                      shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
         >
           <Link
@@ -112,7 +111,6 @@ export default function CartPage() {
             </span>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -184,7 +184,7 @@ export default function AdminOrdersPage() {
                         <span className="text-secondary/80">{item.phone}</span>
                       </td>
 
-                      <td className="px-5 py-4">
+                      <td className="px-5 py-4 max-w-[250px] whitespace-normal break-words">
                         <span className="text-secondary/80">
                           {item.address}
                         </span>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
-import { HiMenu, HiX } from "react-icons/hi";
+import { MdMenu } from "react-icons/md";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,11 +12,59 @@ export default function Header() {
         {/* Logo */}
         <img
           src="/logo.png"
-          className="h-full w-[120px] sm:w-[160px] object-cover"
+          className="h-full w-[150px] hidden lg:flex object-cover"
         />
+        <div className="w-full lg:hidden flex justify-center items-center relative">
+          <MdMenu
+            className="absolute left-0 text-3xl"
+            onClick={() => {
+              setIsOpen(true);
+            }}
+          />
+          <img src="/logo.png" className="h-full w-[150px] object-cover" />
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="fixed top-0 left-0 w-full h-full bg-[#00000080] text-secondary z-100">
+            <div className="w-[300px] bg-primary h-full flex flex-col">
+              <div className="w-full h-[80px] lg:hidden bg-accent flex justify-center items-center relative">
+                <MdMenu
+                  className="absolute left-2 text-3xl text-white"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                />
+                <img
+                  src="/logo.png"
+                  className="h-full w-[150px] object-cover"
+                />
+              </div>
+
+              <a href="/" className="p-4 border-b border-secondary/10">
+                Home
+              </a>
+              <a href="/products" className="p-4 border-b border-secondary/10">
+                Products
+              </a>
+              <a href="/about" className="p-4 border-b border-secondary/10">
+                About
+              </a>
+              <a href="/contact" className="p-4 border-b border-secondary/10">
+                Contact
+              </a>
+              <a href="/cart" className="p-4 border-b border-secondary/10">
+                Cart
+              </a>
+
+
+
+            </div>
+          </div>
+        )}
 
         {/* Desktop Menu */}
-        <div className="hidden sm:flex h-full items-center gap-[50px] pr-[60px] text-lg">
+        <div className="hidden lg:flex h-full items-center gap-[50px] pr-[60px] text-lg">
           <Link to="/">Home</Link>
           <Link to="/products">Products</Link>
           <Link to="/about">About</Link>
@@ -26,28 +74,11 @@ export default function Header() {
         {/* Cart Icon */}
         <Link
           to="/cart"
-          className="text-3xl flex justify-center items-center sm:absolute right-5 h-full"
+          className="hidden lg:flex text-3xl flex absolute right-5 h-full justify-center items-center"
         >
           <BsCart3 />
         </Link>
-
-        {/* Mobile Hamburger */}
-        <div className="sm:hidden flex items-center">
-          <button onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
-          </button>
-        </div>
       </div>
-
-      {/* Mobile Menu (outside header flex to prevent overlap) */}
-      {isOpen && (
-        <div className="sm:hidden w-full bg-accent flex flex-col items-center gap-5 py-4 z-50">
-          <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link to="/products" onClick={() => setIsOpen(false)}>Products</Link>
-          <Link to="/about" onClick={() => setIsOpen(false)}>About</Link>
-          <Link to="/contact" onClick={() => setIsOpen(false)}>Contact</Link>
-        </div>
-      )}
     </header>
   );
 }

@@ -156,7 +156,7 @@ export default function AdminProductPage() {
               </div>
 
               <div className="flex justify-between items-center mt-4">
-                <span className="text-xs bg-primary/40 px-3 py-1 rounded-full">
+                <span className="text-xs text-accent bg-primary/40 px-3 py-1 rounded-full">
                   {item.category}
                 </span>
 
@@ -239,9 +239,6 @@ export default function AdminProductPage() {
                           <span className="font-semibold text-secondary">
                             {item.name}
                           </span>
-                          <span className="text-xs text-secondary/60">
-                            {item.category}
-                          </span>
                         </div>
                       </td>
 
@@ -262,7 +259,7 @@ export default function AdminProductPage() {
                       </td>
 
                       <td className="px-5 py-4">
-                        <span className="inline-flex items-center rounded-full border border-secondary/10 bg-primary/40 px-3 py-1 text-sm text-secondary">
+                        <span className="inline-flex items-center rounded-full border border-secondary/10 bg-primary/40 px-3 py-1 text-sm text-accent">
                           {item.category}
                         </span>
                       </td>
