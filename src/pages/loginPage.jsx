@@ -1,12 +1,35 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const navigate = useNavigate();
+  const googleLogin = useGoogleLogin({
+    onSuccess: (response) => {
+      axios
+        .post(import.meta.env.VITE_API_URL + "/api/users/google-login", {
+          token: response.access_token,
+        })
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
+          const user = res.data.user;
+          if (user.role == "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          console.error("Google login failed:", err);
+          toast.error("Google login failed.Please try again.");
+        });
+    },
+  });
 
   async function login() {
     try {
@@ -17,8 +40,8 @@ export default function LoginPage() {
           password: password,
         },
       );
-      localStorage.setItem("token", response.data.token)
-      toast.success("Login Successful")
+      localStorage.setItem("token", response.data.token);
+      toast.success("Login Successful");
       const user = response.data.user;
       if (user.role == "admin") {
         navigate("/admin");
@@ -27,7 +50,7 @@ export default function LoginPage() {
       }
     } catch (e) {
       console.log("Login Failed:", e);
-      toast.error("Login Failed.Please check again")
+      toast.error("Login Failed.Please check again");
     }
   }
 
@@ -176,15 +199,25 @@ export default function LoginPage() {
                     <span className="relative">Login</span>
                   </button>
 
+                  <button
+                    onClick={googleLogin}
+                    className="w-full h-12 rounded-2xl bg-accent text-white font-semibold tracking-wide
+                               shadow-lg shadow-accent/25 hover:brightness-110 active:brightness-95 transition
+                               relative overflow-hidden"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-130%] hover:translate-x-[130%] transition duration-700" />
+                    <span className="relative">Google Login</span>
+                  </button>
+
                   {/* Create account row (UI only, no logic change) */}
                   <div className="pt-2 text-center text-sm text-primary/75">
                     Don&apos;t have an account?{" "}
-                    <button
-                      type="button"
+                    <Link
+                      to="/register"
                       className="font-semibold text-primary hover:text-white transition underline underline-offset-4 decoration-white/25 hover:decoration-white/60"
                     >
                       Create account
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
 import { MdMenu } from "react-icons/md";
+import UserData from "./userData";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ export default function Header() {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="fixed top-0 left-0 w-full h-full bg-[#00000080] text-secondary z-100">
-            <div className="w-[300px] bg-primary h-full flex flex-col">
+            <div className="w-[300px] bg-primary h-full flex flex-col font-semibold text-accent">
               <div className="w-full h-[80px] lg:hidden bg-accent flex justify-center items-center relative">
                 <MdMenu
                   className="absolute left-2 text-3xl text-white"
@@ -56,19 +57,23 @@ export default function Header() {
               <a href="/cart" className="p-4 border-b border-secondary/10">
                 Cart
               </a>
-
-
-
+                <div className="lg:hidden left-4 flex w-[300px] absolute bottom-[20px] items-center gap-4">
+                  <UserData />
+                </div>
             </div>
           </div>
         )}
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex h-full items-center gap-[50px] pr-[60px] text-lg">
+        <div className="hidden lg:flex h-full items-center absolute gap-[50px] left-[250px] text-lg">
           <Link to="/">Home</Link>
           <Link to="/products">Products</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
+        </div>
+
+        <div className="h-full hidden lg:flex lg:right-[80px] absolute justify-center items-center ">
+          <UserData />
         </div>
 
         {/* Cart Icon */}

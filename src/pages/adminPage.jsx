@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { IoBarChartOutline } from "react-icons/io5";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { BiBox } from "react-icons/bi";
@@ -11,8 +11,41 @@ import AdminProductPage from "./admin/adminProductPage";
 import AddProductPage from "./admin/adminAddNewProduct";
 import UpdateProductPage from "./admin/adminUpdateProduct";
 import AdminOrdersPage from "./admin/adminOrdersPage";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { Loader } from "../components/loader";
 
 export default function AdminPage() {
+  const navigate = useNavigate();
+  const[userLoaded, setUserLoaded] = useState(false)
+  
+  useEffect(
+    ()=>{
+      const token = localStorage.getItem("token");
+      if(token == null){
+        toast.error("Please login to access admin panel");
+        navigate("/login")
+        return;
+      }
+      axios.get(import.meta.env.VITE_API_URL + "/api/users/me",{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },   
+      }).then((res)=>{
+        if(res.data.role !== "admin"){
+          toast.error("You are not authorized to access admin panel")
+          navigate("/")
+          return;
+        }
+        setUserLoaded(true)
+      }).catch(()=>{
+        toast.error("Session expired. Please login again");
+        localStorage.removeItem("token");
+        navigate("/login")
+      })
+    },[]
+  )
+  
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -80,13 +113,13 @@ export default function AdminPage() {
       {/* Content */}
       <div className="sm:w-[calc(100%-350px)] w-full h-full sm:h-full border-[3px] border-accent rounded-[20px] overflow-hidden mt-2 sm:mt-0">
         <div className="w-full max-w-full h-full max-h-full overflow-y-scroll">
-          <Routes path="/">
+          {userLoaded?<Routes path="/">
             <Route path="/" element={<h1>Dashboard</h1>} />
             <Route path="/products" element={<AdminProductPage />} />
             <Route path="/orders" element={<AdminOrdersPage/>} />
             <Route path="/add-product" element={<AddProductPage />} />
             <Route path="/update-product" element={<UpdateProductPage />} />
-          </Routes>
+          </Routes>:<Loader/>}
         </div>
       </div>
     </div>
