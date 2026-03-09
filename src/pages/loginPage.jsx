@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const navigate = useNavigate();
   const googleLogin = useGoogleLogin({
     onSuccess: (response) => {
@@ -181,12 +181,12 @@ export default function LoginPage() {
 
                   {/* Forgot password row (UI only, no logic change) */}
                   <div className="flex items-center justify-end">
-                    <button
-                      type="button"
+                    <Link
+                      to="/forget-password"
                       className="text-sm font-medium text-primary/80 hover:text-primary transition underline underline-offset-4 decoration-white/25 hover:decoration-white/50"
                     >
                       Forgot password?
-                    </button>
+                    </Link>
                   </div>
 
                   <button
@@ -201,12 +201,18 @@ export default function LoginPage() {
 
                   <button
                     onClick={googleLogin}
-                    className="w-full h-12 rounded-2xl bg-accent text-white font-semibold tracking-wide
-                               shadow-lg shadow-accent/25 hover:brightness-110 active:brightness-95 transition
-                               relative overflow-hidden"
+                    className="w-full h-12 flex items-center justify-center gap-3
+             bg-white text-gray-700 font-medium rounded-xl
+             border border-gray-300 shadow-sm
+             hover:shadow-md hover:bg-gray-50
+             transition-all duration-200"
                   >
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-130%] hover:translate-x-[130%] transition duration-700" />
-                    <span className="relative">Google Login</span>
+                    <img
+                      src="https://www.svgrepo.com/show/475656/google-color.svg"
+                      alt="google"
+                      className="w-5 h-5"
+                    />
+                    <span>Continue with Google</span>
                   </button>
 
                   {/* Create account row (UI only, no logic change) */}

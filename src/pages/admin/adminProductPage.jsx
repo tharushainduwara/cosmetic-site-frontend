@@ -12,6 +12,7 @@ function ProductDeleteConfirm(props) {
   const productID = props.productID;
   const close = props.close;
   const refresh = props.refresh;
+  
   function deleteProduct() {
     const token = localStorage.getItem("token");
     axios
@@ -40,7 +41,7 @@ function ProductDeleteConfirm(props) {
         >
           <GrClose />
         </button>
-        <p className="text-xl font-semibold">
+        <p className="text-xl font-semibold text-center">
           Are you sure? You want to delete the product with Product ID:
           {productID}?
         </p>
