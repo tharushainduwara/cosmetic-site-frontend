@@ -87,7 +87,7 @@ export default function UserSettings() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[url('bg.jpg')] bg-cover bg-center flex items-center justify-center p-6">
+    <div className="min-h-screen w-full bg-[url('/bg.jpg')] bg-cover bg-center flex items-center justify-center p-6">
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8">
         {/* LEFT CARD */}
         <div className="bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl p-8 animate-fadeIn">
