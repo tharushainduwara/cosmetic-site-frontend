@@ -29,7 +29,7 @@ export default function ProductCard(props) {
         {/* Category pill */}
         <div
           className="absolute top-3 left-3 rounded-full border border-white/30 bg-white/15 backdrop-blur-md px-3 py-1
-                        text-[11px] font-medium text-white/90 shadow-sm"
+                        text-[11px] font-medium text-accent/70 shadow-sm"
         >
           {product.category}
         </div>

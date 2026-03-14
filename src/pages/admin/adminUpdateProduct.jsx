@@ -229,9 +229,14 @@ export default function UpdateProductPage() {
                   className="w-full rounded-xl border border-secondary/15 bg-white/70 px-3.5 py-2.5 text-secondary outline-none
                              focus:ring-2 focus:ring-accent/35 focus:border-accent/40 transition"
                 >
-                  <option value="cream">Cream</option>
-                  <option value="lotion">Lotion</option>
-                  <option value="serum">Serum</option>
+                  <option value="Cream">Cream</option>
+                  <option value="Lotion">Lotion</option>
+                  <option value="Serum">Serum</option>
+                  <option value="Makeup">Makeup</option>
+                  <option value="Skincare">Skincare</option>
+                  <option value="Gloss">Gloss</option>
+                  <option value="Powder">Powder</option>
+                  <option value="Eye">Eye</option>
                 </select>
               </div>
 

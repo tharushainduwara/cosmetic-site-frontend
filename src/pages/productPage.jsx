@@ -8,6 +8,24 @@ import { FiSearch } from "react-icons/fi";
 export function ProductPage() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [category, setCategory] = useState(["All"]);
+  const [categories, setCategories] = useState([]);
+
+useEffect(() => {
+  async function fetchCategories() {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/products/categories`,
+      );
+      console.log("Categories fetched:", res.data); // ✅ debug
+      setCategories(["All", ...res.data]);
+    } catch (err) {
+      console.error("Failed to load categories:", err); // show actual error
+      toast.error("Failed to load categories");
+    }
+  }
+  fetchCategories();
+}, []);
 
   useEffect(() => {
     if (isLoading) {
@@ -55,17 +73,20 @@ export function ProductPage() {
               <input
                 type="text"
                 placeholder="Search cosmetics, skincare..."
-                onChange={async (e)=>{
-                  try{
-                    if(e.target.value == ""){
+                onChange={async (e) => {
+                  try {
+                    if (e.target.value == "") {
                       setIsLoading(true);
-                    }else{
-                      const searchResult = await axios.get(import.meta.env.VITE_API_URL + "/api/products/search/" + e.target.value);
+                    } else {
+                      const searchResult = await axios.get(
+                        import.meta.env.VITE_API_URL +
+                          "/api/products/search/" +
+                          e.target.value,
+                      );
                       setProducts(searchResult.data);
                     }
-                  }catch{
-                    toast.error("Search failed")
-
+                  } catch {
+                    toast.error("Search failed");
                   }
                 }}
                 className="w-full pl-11 pr-4 py-3
@@ -82,6 +103,49 @@ export function ProductPage() {
         focus:border-[#A33A3A]
         transition-all duration-200"
               />
+            </div>
+
+            <div className="flex items-center gap-2 w-[150px]">
+              <select
+                value={category}
+                onChange={async (e) => {
+                  const selected = e.target.value;
+                  setCategory(selected);
+
+                  try {
+                    if (selected === "All") {
+                      setIsLoading(true);
+                    } else {
+                      const res = await axios.get(
+                        import.meta.env.VITE_API_URL +
+                          "/api/products/category/" +
+                          selected,
+                      );
+                      setProducts(res.data);
+                    }
+                  } catch {
+                    toast.error("Failed to filter by category");
+                  }
+                }}
+                className="w-[130px] pl-5 pr-4 py-3
+        rounded-full
+        border-2 border-[#A33A3A]/30
+        bg-white
+        shadow-md
+        text-sm
+        text-secondary
+        focus:outline-none
+        focus:ring-2
+        focus:ring-[#A33A3A]/40
+        focus:border-[#A33A3A]
+        transition-all duration-200"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Status Chip */}

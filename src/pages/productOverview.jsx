@@ -67,7 +67,7 @@ export default function ProductOverview() {
 
                 <span
                   className="inline-flex items-center rounded-full border border-white/25 bg-white/10 backdrop-blur-md px-3 py-1
-                                 text-xs font-medium text-secondary/70"
+                                 text-xs font-medium text-accent/70"
                 >
                   {product.category}
                 </span>
