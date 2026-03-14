@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import AdminPage from './pages/adminPage';
 import HomePage from './pages/homePage';
-import TestPage from './pages/test';
 import LoginPage from './pages/loginPage';
 import { Toaster } from 'react-hot-toast';
 import RegisterPage from './pages/registerPage';
@@ -24,15 +23,12 @@ function App() {
           <Route path = "/register" element={<RegisterPage/>}/>
           <Route path = "/forget-password" element={<ForgetPassword/>}/>
           <Route path ="/login" element={<LoginPage/>}/>
-          <Route path = "/admin/*" element={<AdminPage/>}/>
-          <Route path = "/test" element={<TestPage/>}/>
+          <Route path = "/admin/*" element={<AdminPage/>}/>       
           <Route path = "/settings" element={<UserSettings/>}/>
           
         </Routes>
-
-
       </div>
-    </GoogleOAuthProvider>;
+    </GoogleOAuthProvider>
     </BrowserRouter>
   );
 }

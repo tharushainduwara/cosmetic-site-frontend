@@ -55,7 +55,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative w-full min-h-screen bg-[url('/bg.jpg')] bg-cover bg-center">
+    <div className="relative w-full min-h-[calc(100vh-80px)] bg-[url('/bg.jpg')] bg-cover bg-center">
       {/* Soft layered overlays */}
       <div className="absolute inset-0 bg-secondary/70" />
       <div className="absolute inset-0 bg-gradient-to-tr from-accent/25 via-transparent to-primary/10" />

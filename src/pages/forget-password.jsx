@@ -48,12 +48,16 @@ export default function ForgetPassword(){
     
     return(
         <div className="w-full h-screen flex justify-center items-center bg-[url('/bg.jpg')] bg-cover bg-center">
-            {step == "email" && <div className="w-[400px] h-[400px] backdrop-blur-lg rounded-2xl flex flex-col justify-center items-center p-6 ">
+        {/* Soft layered overlays */}
+        <div className="absolute inset-0 bg-secondary/70" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-accent/30 via-transparent to-primary/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(250,243,225,0.16),transparent_25%)]" />    
+            {step == "email" && <div className="w-[400px] h-[400px] backdrop-blur-lg border border-accent/50 rounded-2xl flex flex-col justify-center items-center p-6 ">
                 <h1 className="text-2xl font-semibold text-primary mb-6">Reset Password</h1>
                 <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email" className="w-full text-white p-3 rounded-lg border border-secondary/20 mb-4 focus:outline-none focus:ring-2 focus:ring-accent"/>
                 <button className="w-full bg-accent text-white p-3 rounded-lg hover:bg-accent/90 transition" onClick={sendOTP}>Send OTP</button>
             </div>}
-            {step == "otp" && <div className="w-[400px] backdrop-blur-lg rounded-2xl flex flex-col justify-center items-center p-6 ">
+            {step == "otp" && <div className="w-[400px] backdrop-blur-lg border border-accent/50 rounded-2xl flex flex-col justify-center items-center p-6 ">
                 <h1 className="text-2xl font-semibold text-primary mb-6">Reset Password</h1>
                 <input type="text" value={otp} onChange={(e)=>setOtp(e.target.value)} placeholder="Enter OTP" className="w-full text-white p-3 rounded-lg border border-secondary/20 mb-4 focus:outline-none focus:ring-2 focus:ring-accent"/>
                 <input type="password" value={newPassword} onChange={(e)=> setNewPassword(e.target.value)} placeholder="Enter new password" className="w-full text-white p-3 rounded-lg border border-secondary/20 mb-4 focus:outline-none focus:ring-2 focus:ring-accent"/>

@@ -87,10 +87,14 @@ export default function UserSettings() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[url('/bg.jpg')] bg-cover bg-center flex items-center justify-center p-6">
+    <div className="relative min-h-screen overflow-hidden w-full bg-[url('/bg.jpg')] bg-cover bg-center flex items-center justify-center p-6 ">
+      {/* Soft layered overlays */}
+      <div className="absolute inset-0 bg-secondary/70" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-accent/30 via-transparent to-primary/20" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(250,243,225,0.16),transparent_25%)]" />
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8">
         {/* LEFT CARD */}
-        <div className="bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl p-8 animate-fadeIn">
+        <div className="bg-white/40 backdrop-blur-lg rounded-3xl shadow-2xl p-8 animate-fadeIn">
           <h2 className="text-2xl font-bold text-secondary mb-6">
             Profile Settings
           </h2>
@@ -156,7 +160,7 @@ export default function UserSettings() {
         </div>
 
         {/* RIGHT CARD */}
-        <div className="bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl p-8 animate-fadeIn">
+        <div className="bg-white/40 backdrop-blur-xl rounded-3xl shadow-2xl p-8 animate-fadeIn">
           <h2 className="text-2xl font-bold text-secondary mb-6">
             Change Password
           </h2>
