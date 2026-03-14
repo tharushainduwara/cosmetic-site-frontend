@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ProductCard from "../components/productCard";
 import { Loader } from "../components/loader";
+import { FiSearch } from "react-icons/fi";
 
 export function ProductPage() {
   const [products, setProducts] = useState([]);
@@ -34,7 +35,8 @@ export function ProductPage() {
       {/* Page container */}
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Header */}
-        <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          {/* Left Section */}
           <div>
             <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-secondary">
               Shop Products
@@ -44,12 +46,51 @@ export function ProductPage() {
             </p>
           </div>
 
-          {/* Small status chip (visual only) */}
-          <div className="inline-flex items-center gap-2 self-start sm:self-auto rounded-full border border-white/25 bg-white/10 backdrop-blur-md px-4 py-2 shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-accent" />
-            <span className="text-xs font-medium text-secondary/80">
-              {products.length} items
-            </span>
+          {/* Right Section */}
+          <div className="flex items-center gap-4">
+            {/* Enhanced Search Bar */}
+            <div className="relative w-[260px] sm:w-[320px]">
+              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-secondary/60 text-lg" />
+
+              <input
+                type="text"
+                placeholder="Search cosmetics, skincare..."
+                onChange={async (e)=>{
+                  try{
+                    if(e.target.value == ""){
+                      setIsLoading(true);
+                    }else{
+                      const searchResult = await axios.get(import.meta.env.VITE_API_URL + "/api/products/search/" + e.target.value);
+                      setProducts(searchResult.data);
+                    }
+                  }catch{
+                    toast.error("Search failed")
+
+                  }
+                }}
+                className="w-full pl-11 pr-4 py-3
+        rounded-full
+        border-2 border-[#A33A3A]/30
+        bg-white
+        shadow-md
+        text-sm
+        text-secondary
+        placeholder-secondary/50
+        focus:outline-none
+        focus:ring-2
+        focus:ring-[#A33A3A]/40
+        focus:border-[#A33A3A]
+        transition-all duration-200"
+              />
+            </div>
+
+            {/* Status Chip */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/20 backdrop-blur-md px-4 py-2 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-accent" />
+              <span className="text-xs font-medium text-secondary/80">
+                {products.length} items
+              </span>
+            </div>
           </div>
         </div>
 
@@ -60,8 +101,10 @@ export function ProductPage() {
         ) : (
           <>
             {/* Grid (layout only) */}
-            <div className="w-full h-full grid gap-6 justify-items-center
-                            grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div
+              className="w-full h-full grid gap-6 justify-items-center
+                            grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            >
               {products.map((item) => {
                 return <ProductCard key={item.productID} product={item} />;
               })}
