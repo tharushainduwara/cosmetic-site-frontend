@@ -60,7 +60,7 @@ export default function UserData() {
           {open && (
             <div className="top-[-120px] absolute lg:right-0 lg:top-[50px] w-[180px] z-50 bg-white text-accent rounded-xl shadow-xl  overflow-hidden animate-fadeIn">
               <a
-                href="/account"
+                href="/settings"
                 className="block px-4 py-2 text-sm font-semibold hover:bg-primary transition"
               >
                 Account Settings
