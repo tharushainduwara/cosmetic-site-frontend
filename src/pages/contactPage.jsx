@@ -1,11 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import SubscribeForm from "../components/subscribeForm";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Footer from "../components/footer";
 
 export default function ContactPage() {
-  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -98,13 +97,13 @@ export default function ContactPage() {
             <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6">
               <h3 className="font-semibold text-lg mb-1">📍 Address</h3>
               <p className="text-secondary/80">
-                123 Beauty Street, Colombo, Sri Lanka
+                137 1/4 2nd Cross Street, 11
               </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6">
               <h3 className="font-semibold text-lg mb-1">📞 Phone</h3>
-              <p className="text-secondary/80">+94 71 234 5678</p>
+              <p className="text-secondary/80"> (+94) ( 011) 2325038</p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6">
@@ -129,55 +128,8 @@ export default function ContactPage() {
             <SubscribeForm />
           </div>
         </section>
+        <Footer/>
 
-        {/* FOOTER */}
-        <footer className="relative bg-secondary p-10 text-white">
-          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto w-full">
-            <div>
-              <h4 className="font-semibold mb-4">Products</h4>
-              <ul className="space-y-2">
-                <li className="hover:text-accent cursor-pointer">Skincare</li>
-                <li className="hover:text-accent cursor-pointer">Makeup</li>
-                <li className="hover:text-accent cursor-pointer">Fragrance</li>
-                <li
-                  className="hover:text-accent cursor-pointer"
-                  onClick={() => navigate("/products")}
-                >
-                  All Products
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li className="hover:text-accent cursor-pointer">
-                  <a onClick={() => navigate("/about")}>About</a>
-                </li>
-                <li className="hover:text-accent cursor-pointer">
-                  <a onClick={()=> navigate("/terms")}>Terms & Conditions</a>
-                </li>
-                <li className="hover:text-accent cursor-pointer">
-                  <a onClick={()=> navigate("/terms")}>Privacy Policy</a>
-                </li>
-                <li className="hover:text-accent cursor-pointer">Contact</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Follow Us</h4>
-              <div className="flex gap-4">
-                <a className="hover:text-accent cursor-pointer">Facebook</a>
-                <a className="hover:text-accent cursor-pointer">Twitter</a>
-                <a className="hover:text-accent cursor-pointer">Instagram</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-primary/20 mt-10 pt-6 text-center text-primary text-sm">
-            © {new Date().getFullYear()} Beauty Shop. All rights reserved.
-          </div>
-        </footer>
       </div>
     </div>
   );

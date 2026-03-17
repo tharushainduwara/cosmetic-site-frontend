@@ -68,3 +68,7 @@ export function getTotal(){
     )
     return total
 }
+
+export function clearCart() {
+  localStorage.removeItem("cart"); // or however your cart is stored
+}

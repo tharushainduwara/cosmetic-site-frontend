@@ -7,8 +7,7 @@ import CheckoutPage from "./checkout";
 import LandingPage from "./landingPage";
 import AboutPage from "./aboutPage";
 import ContactPage from "./contactPage";
-import TermsPage from "./termsPage";
-import PrivacyPage from "./privacyPage";
+
 
 export default function HomePage(){
     return(
