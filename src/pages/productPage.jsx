@@ -4,28 +4,31 @@ import toast from "react-hot-toast";
 import ProductCard from "../components/productCard";
 import { Loader } from "../components/loader";
 import { FiSearch } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import SubscribeForm from "../components/subscribeForm";
 
 export function ProductPage() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(["All"]);
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
-useEffect(() => {
-  async function fetchCategories() {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/products/categories`,
-      );
-      console.log("Categories fetched:", res.data); // ✅ debug
-      setCategories(["All", ...res.data]);
-    } catch (err) {
-      console.error("Failed to load categories:", err); // show actual error
-      toast.error("Failed to load categories");
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/products/categories`,
+        );
+        console.log("Categories fetched:", res.data); // ✅ debug
+        setCategories(["All", ...res.data]);
+      } catch (err) {
+        console.error("Failed to load categories:", err); // show actual error
+        toast.error("Failed to load categories");
+      }
     }
-  }
-  fetchCategories();
-}, []);
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     if (isLoading) {
@@ -44,7 +47,7 @@ useEffect(() => {
   }, [isLoading]);
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] bg-primary relative overflow-hidden">
+    <div className="w-full min-h-[calc(100vh-100px)] bg-primary relative overflow-hidden">
       {/* Premium background (visual only) */}
       <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
@@ -176,6 +179,79 @@ useEffect(() => {
           </>
         )}
       </div>
+
+        {/* CTA SECTION */}
+        <section className="py-20 px-6 border-t border-secondary/20">
+
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+
+            <div>
+              <h3 className="text-3xl font-bold mb-2">
+                Stay in the Glow
+              </h3>
+
+              <p className="text-secondary/80">
+                Subscribe to receive beauty tips, new collections, and exclusive
+                offers.
+              </p>
+            </div>
+
+            <SubscribeForm />
+
+          </div>
+
+        </section>
+
+        {/* FOOTER */}
+        <footer className="relative bg-secondary p-10 text-white">
+
+          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto w-full">
+
+            <div>
+              <h4 className="font-semibold mb-4">Products</h4>
+              <ul className="space-y-2">
+                <li className="hover:text-accent cursor-pointer">Skincare</li>
+                <li className="hover:text-accent cursor-pointer">Makeup</li>
+                <li className="hover:text-accent cursor-pointer">Fragrance</li>
+                <li
+                  className="hover:text-accent cursor-pointer"
+                  onClick={() => navigate("/products")}
+                >
+                  All Products
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2">
+                <li className="hover:text-accent cursor-pointer"><a onClick={()=> navigate("/about")}>About</a></li>
+                <li className="hover:text-accent cursor-pointer">
+                  <a onClick={()=> navigate("/terms")}>Terms & Conditions</a>
+                </li>
+                <li className="hover:text-accent cursor-pointer">
+                  <a onClick={()=> navigate("/terms")}>Privacy Policy</a>
+                </li>
+                <li className="hover:text-accent cursor-pointer"><a onClick={()=> navigate("/contact")}>Contact</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Follow Us</h4>
+              <div className="flex gap-4">
+                <a className="hover:text-accent cursor-pointer">Facebook</a>
+                <a className="hover:text-accent cursor-pointer">Twitter</a>
+                <a className="hover:text-accent cursor-pointer">Instagram</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="border-t border-primary/20 mt-10 pt-6 text-center text-primary text-sm">
+            © {new Date().getFullYear()} Beauty Shop. All rights reserved.
+          </div>
+
+        </footer>
     </div>
   );
 }

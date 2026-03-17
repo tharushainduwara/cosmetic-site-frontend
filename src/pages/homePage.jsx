@@ -5,6 +5,10 @@ import ProductOverview from "./productOverview";
 import CartPage from "./cart";
 import CheckoutPage from "./checkout";
 import LandingPage from "./landingPage";
+import AboutPage from "./aboutPage";
+import ContactPage from "./contactPage";
+import TermsPage from "./termsPage";
+import PrivacyPage from "./privacyPage";
 
 export default function HomePage(){
     return(
@@ -13,12 +17,11 @@ export default function HomePage(){
             <Routes path="/">
                <Route path="/" element={<LandingPage/>}/>
                <Route path="/products" element={<ProductPage/>}/>
-               <Route path="/contact" element={<h1>Contact Us</h1>}/>
-               <Route path="/about" element={<h1>About Us</h1>}/>
+               <Route path="/contact" element={<ContactPage/>}/>
+               <Route path="/about" element={<AboutPage/>}/>
                <Route path="/overview/:id" element={<ProductOverview/>}/>
                <Route path="/cart" element={<CartPage/>}/>
                <Route path="/checkout" element={<CheckoutPage/>}/>
-               <Route path="/*" element={<h1>404 Not Found</h1>}/>
             </Routes>
         </div>
     )

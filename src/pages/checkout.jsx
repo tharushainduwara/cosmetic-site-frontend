@@ -63,7 +63,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] bg-primary flex flex-col pt-6 items-center relative overflow-hidden px-4">
+    <div className="w-full min-h-[calc(100vh-100px)] bg-primary flex flex-col pt-6 items-center relative overflow-hidden px-4">
       {/* Premium background glow */}
       <div className="pointer-events-none absolute -top-36 -right-36 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-36 -left-36 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />

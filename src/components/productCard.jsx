@@ -9,7 +9,7 @@ export default function ProductCard(props) {
                     border border-white/25 bg-white/10 backdrop-blur-xl
                     shadow-[0_12px_40px_rgba(0,0,0,0.18)]
                     hover:shadow-[0_18px_60px_rgba(0,0,0,0.25)]
-                    transition-all duration-300 hover:-translate-y-2"
+                    transition-all duration-300 hover:-translate-y-4"
     >
       {/* Soft glow + luxury gradient (visual only) */}
       <div className="pointer-events-none absolute -top-24 -right-24 h-52 w-52 rounded-full bg-accent/25 blur-3xl" />

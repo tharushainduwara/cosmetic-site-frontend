@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../components/loader";
 import ImageSlider from "../components/imageSlider";
 import { addToCart} from "../utils/cart";
+import SubscribeForm from "../components/subscribeForm";
 
 export default function ProductOverview() {
   const params = useParams();
   const [status, setStatus] = useState("loading");
   const [product, setProduct] = useState(null);
+    const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -25,7 +27,7 @@ export default function ProductOverview() {
   }, []);
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] text-secondary relative overflow-hidden bg-primary">
+    <div className="w-full min-h-[calc(100vh-100px)] text-secondary relative overflow-hidden bg-primary">
       {/* Luxe background (visual only) */}
       <div className="pointer-events-none absolute -top-44 -right-44 h-[520px] w-[520px] rounded-full bg-accent/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-44 -left-44 h-[520px] w-[520px] rounded-full bg-secondary/10 blur-3xl" />
@@ -44,11 +46,11 @@ export default function ProductOverview() {
                        rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl
                        shadow-[0_18px_60px_rgba(0,0,0,0.18)] overflow-hidden"
           >
-            {/* Left: Gallery */}      
+            {/* Left: Gallery */}
             <h1 className="absolute p-8 text-2xl sm:text-3xl font-semibold tracking-tight lg:hidden">
               {product.name}
             </h1>
-            <div className="w-full flex justify-center items-center p-5 sm:p-8" >             
+            <div className="w-full flex justify-center items-center p-5 sm:p-8">
               <div className="w-full max-w-xl relative p-15 flex justify-center items-center">
                 <ImageSlider images={product.images} />
               </div>
@@ -134,14 +136,18 @@ export default function ProductOverview() {
                   Add to Cart
                 </button>
 
-                <Link to="/checkout" state={[{
-                  images : product.images[0],
-                  productID : product.productID,
-                  name : product.name,
-                  price : product.price,
-                  labelPrice : product.labelPrice,
-                  quantity : 1
-                }]}
+                <Link
+                  to="/checkout"
+                  state={[
+                    {
+                      images: product.images[0],
+                      productID: product.productID,
+                      name: product.name,
+                      price: product.price,
+                      labelPrice: product.labelPrice,
+                      quantity: 1,
+                    },
+                  ]}
                   className="w-full h-[44px] rounded-2xl border border-white/30 bg-white/10 backdrop-blur-md
                                    text-accent font-semibold flex justify-center items-center
                                    shadow-sm transition-all duration-300
@@ -173,6 +179,71 @@ export default function ProductOverview() {
           </div>
         </div>
       )}
+
+      {/* CTA SECTION */}
+      <section className="py-20 px-6 border-t border-secondary/20">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h3 className="text-3xl font-bold mb-2">Stay in the Glow</h3>
+
+            <p className="text-secondary/80">
+              Subscribe to receive beauty tips, new collections, and exclusive
+              offers.
+            </p>
+          </div>
+
+          <SubscribeForm />
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="relative bg-secondary p-10 text-white">
+        <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto w-full">
+          <div>
+            <h4 className="font-semibold mb-4">Products</h4>
+            <ul className="space-y-2">
+              <li className="hover:text-accent cursor-pointer">Skincare</li>
+              <li className="hover:text-accent cursor-pointer">Makeup</li>
+              <li className="hover:text-accent cursor-pointer">Fragrance</li>
+              <li
+                className="hover:text-accent cursor-pointer"
+                onClick={() => navigate("/products")}
+              >
+                All Products
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Company</h4>
+            <ul className="space-y-2">
+              <li className="hover:text-accent cursor-pointer">
+                <a onClick={() => navigate("/about")}>About</a>
+              </li>
+              <li className="hover:text-accent cursor-pointer">
+                <a onClick={()=> navigate("/terms")}>Terms & Conditions</a>
+              </li>
+              <li className="hover:text-accent cursor-pointer">
+                <a onClick={()=> navigate("/terms")}>Privacy Policy</a>
+              </li>
+              <li className="hover:text-accent cursor-pointer"><a onClick={()=> navigate("/contact")}>Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Follow Us</h4>
+            <div className="flex gap-4">
+              <a className="hover:text-accent cursor-pointer">Facebook</a>
+              <a className="hover:text-accent cursor-pointer">Twitter</a>
+              <a className="hover:text-accent cursor-pointer">Instagram</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-primary/20 mt-10 pt-6 text-center text-primary text-sm">
+          © {new Date().getFullYear()} Beauty Shop. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 }

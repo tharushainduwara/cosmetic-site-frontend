@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-accent text-white">
-      <div className="w-full h-[80px] flex items-center justify-between px-4 sm:px-[40px] relative">
+      <div className="w-full h-[100px] flex items-center justify-between px-4 sm:px-[40px] relative">
         {/* Logo */}
         <img
           src="/logo.png"

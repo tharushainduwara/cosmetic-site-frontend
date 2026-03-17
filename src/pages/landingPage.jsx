@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../components/productCard";
+import SubscribeForm from "../components/subscribeForm";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -11,10 +12,9 @@ export default function LandingPage() {
     async function loadProducts() {
       try {
         const res = await axios.get(
-          import.meta.env.VITE_API_URL + "/api/products",
+          import.meta.env.VITE_API_URL + "/api/products"
         );
 
-        // show only first 4 products
         setProducts(res.data.slice(0, 4));
       } catch {
         console.log("Failed to load landing products");
@@ -25,47 +25,42 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="w-full text-secondary">
+    <div className="w-full text-secondary bg-primary relative overflow-hidden">
+
+      {/* PREMIUM BACKGROUND (same as AboutPage) */}
+      <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-accent/20 blur-3xl"></div>
+      <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-secondary/10 blur-3xl"></div>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/10"></div>
+
       {/* HERO SECTION */}
       <section
-        className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6
-  bg-[url('/landpage.jpg')] bg-contain bg-fixed bg-center relative overflow-hidden"
+        className="min-h-[calc(100vh-100px)] flex items-center justify-center px-6
+        bg-[url('/landpage.jpg')] bg-contain bg-fixed bg-center relative overflow-hidden"
       >
-        {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/25 to-transparent"></div>
 
-        {/* Decorative Glow */}
-        <div className="absolute -top-20 -right-20 w-96 h-96 bg-accent/30 blur-3xl rounded-lg"></div>
-
         <div className="relative max-w-7xl w-full grid md:grid-cols-2 items-center">
-          {/* Empty column for spacing */}
           <div></div>
 
-          {/* Content */}
           <div className="flex flex-col gap-6 text-white p-8 rounded-3xl bg-white/10 backdrop-blur-md shadow-xl">
-            {/* Badge */}
             <span className="inline-block px-4 py-1 text-sm tracking-wide text-accent bg-white/90 rounded-full font-medium">
               Premium Beauty Collection
             </span>
 
-            {/* Heading */}
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
               Luxury <span className="text-accent">Cosmetics</span>
             </h1>
 
-            {/* Subheading */}
             <h2 className="text-xl md:text-2xl font-medium text-white/90">
               Elevate Your Natural Beauty
             </h2>
 
-            {/* Description */}
             <p className="text-lg md:text-xl text-white/85 max-w-xl">
               Discover premium skincare and beauty essentials crafted with
               high-quality ingredients to bring elegance, glow, and confidence
               to your everyday routine.
             </p>
 
-            {/* Feature Tags */}
             <div className="flex flex-wrap gap-4 text-sm text-white/80">
               <span className="bg-white/10 px-3 py-1 rounded-full">
                 🌿 Natural Ingredients
@@ -78,20 +73,17 @@ export default function LandingPage() {
               </span>
             </div>
 
-            {/* Buttons */}
             <div className="flex gap-6 flex-wrap mt-2">
               <button
                 onClick={() => navigate("/products")}
-                className="px-8 py-3 bg-accent text-white rounded-xl
-          hover:scale-105 hover:shadow-xl transition duration-300"
+                className="px-8 py-3 bg-accent text-white rounded-xl hover:scale-105 hover:shadow-xl transition duration-300"
               >
                 Shop Now
               </button>
 
               <button
                 onClick={() => navigate("/products")}
-                className="px-8 py-3 border border-white text-white rounded-xl
-          hover:bg-white hover:text-secondary transition duration-300"
+                className="px-8 py-3 border border-white text-white rounded-xl hover:bg-white hover:text-secondary transition duration-300"
               >
                 Browse Products
               </button>
@@ -100,20 +92,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS FROM API */}
-      <section className="py-28 px-6 bg-primary relative overflow-hidden">
-        {/* Decorative background glow */}
-        <div className="absolute -top-32 -right-32 w-96 h-96 bg-accent/20 blur-3xl rounded-full"></div>
-
+      {/* FEATURED PRODUCTS */}
+      <section className="py-28 px-6 relative">
         <div className="max-w-7xl mx-auto relative">
-          {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-6">
             <div>
               <p className="text-accent font-semibold tracking-wide mb-2">
                 Featured Collection
               </p>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-secondary">
+              <h2 className="text-3xl md:text-4xl font-bold">
                 Featured Products
               </h2>
 
@@ -122,24 +110,18 @@ export default function LandingPage() {
 
             <button
               onClick={() => navigate("/products")}
-              className="group flex items-center gap-2 text-accent font-semibold
-        hover:gap-3 transition-all duration-300"
+              className="group flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all duration-300"
             >
               View All
               <span className="group-hover:translate-x-1 transition">→</span>
             </button>
           </div>
 
-          {/* Product Grid */}
-          <div
-            className="grid gap-8
-      grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          >
+          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map((item) => (
               <div
                 key={item.productID}
-                onClick={() => navigate(`/product/${item.productID}`)}
-                className="cursor-pointer transform hover:-translate-y-2 hover:shadow-xl transition duration-300"
+                className="cursor-pointer transform hover:-translate-y-2 transition-all duration-300"
               >
                 <ProductCard product={item} />
               </div>
@@ -148,102 +130,77 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Mission SECTION */}
-      <section className="py-28 px-6 bg-primary relative overflow-hidden">
-        {/* Decorative background glows */}
-        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-accent/20 blur-3xl rounded-full"></div>
-
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          {/* Section Header */}
+      {/* MISSION SECTION */}
+      <section className="py-28 px-6 relative">
+        <div className="max-w-7xl mx-auto text-center">
           <p className="text-accent font-semibold tracking-wide mb-2">
             Our Promise
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-secondary">
+
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
             Experience Beauty Like Never Before
           </h2>
 
-          {/* Feature Cards */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Card 1 */}
-            <div className="group relative bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer">
+            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg hover:shadow-2xl transition">
               <div className="text-4xl mb-4">💎</div>
-              <h3 className="text-xl font-semibold mb-2 text-secondary">
-                Premium Ingredients
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Premium Ingredients</h3>
               <p className="text-secondary/80">
-                Only the finest natural and luxurious ingredients, designed to
-                nourish and protect your skin.
+                Only the finest natural and luxurious ingredients.
               </p>
             </div>
 
-            {/* Card 2 */}
-            <div className="group relative bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer">
+            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg hover:shadow-2xl transition">
               <div className="text-4xl mb-4">✨</div>
-              <h3 className="text-xl font-semibold mb-2 text-secondary">
-                Long-Lasting Glow
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Long-Lasting Glow</h3>
               <p className="text-secondary/80">
-                Formulated to maintain elegance and radiance throughout your
-                day, for an effortless luxurious look.
+                Maintain elegance and radiance throughout your day.
               </p>
             </div>
 
-            {/* Card 3 */}
-            <div className="group relative bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer">
+            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg hover:shadow-2xl transition">
               <div className="text-4xl mb-4">🌿</div>
-              <h3 className="text-xl font-semibold mb-2 text-secondary">
+              <h3 className="text-xl font-semibold mb-2">
                 Dermatologist Tested
               </h3>
               <p className="text-secondary/80">
-                Safe, skin-friendly, and tested to provide the best experience
-                without compromise.
+                Safe, skin-friendly, and tested for the best experience.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <footer className="relative bg-primary/50  text-secondary overflow-hidden">
-        <div className="relative max-w-7xl mx-auto px-6 py-20 flex flex-col gap-16">
-          {/* Newsletter Section */}
-          <div className="flex flex-col text-center items-center gap-4">
-            <h3 className="text-3xl font-bold">Stay in the Glow</h3>
-            <p className="text-secondary/80 max-w-md ">
-              Subscribe to our newsletter for the latest updates, luxury
-              collections, and exclusive offers.
+      {/* CTA */}
+      <section className="py-20 px-6 border-t border-secondary/20">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h3 className="text-3xl font-bold mb-2">Stay in the Glow</h3>
+            <p className="text-secondary/80">
+              Subscribe to receive beauty tips, new collections, and exclusive
+              offers.
             </p>
-
-            <form className="flex flex-col sm:flex-row gap-4 mt-4 w-full max-w-md">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-xl border border-secondary/30 focus:outline-none focus:ring-2 focus:ring-accent transition"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:scale-105 hover:shadow-lg transition duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
           </div>
 
-          {/* Links Section */}
-          <div className="grid sm:grid-cols-3 gap-12 text-center sm:text-left">
+          <SubscribeForm />
+        </div>
+      </section>
+
+      {/* FOOTER */}
+        <footer className="relative bg-secondary p-10 text-white">
+
+          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto w-full">
+
             <div>
               <h4 className="font-semibold mb-4">Products</h4>
               <ul className="space-y-2">
-                <li className="hover:text-accent cursor-pointer transition">
-                  Skincare
-                </li>
-                <li className="hover:text-accent cursor-pointer transition">
-                  Makeup
-                </li>
-                <li className="hover:text-accent cursor-pointer transition">
-                  Fragrance
-                </li>
-                <li className="hover:text-accent cursor-pointer transition" onClick={() => navigate("/products")}>
+                <li className="hover:text-accent cursor-pointer">Skincare</li>
+                <li className="hover:text-accent cursor-pointer">Makeup</li>
+                <li className="hover:text-accent cursor-pointer">Fragrance</li>
+                <li
+                  className="hover:text-accent cursor-pointer"
+                  onClick={() => navigate("/products")}
+                >
                   All Products
                 </li>
               </ul>
@@ -252,52 +209,33 @@ export default function LandingPage() {
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2">
-                <li className="hover:text-accent cursor-pointer transition">
-                  <a>About Us</a>
+                <li className="hover:text-accent cursor-pointer"><a onClick={()=> navigate("/about")}>About</a></li>
+                <li className="hover:text-accent cursor-pointer">
+                  <a onClick={()=> navigate("/terms")}>Terms & Conditions</a>
                 </li>
-                <li className="hover:text-accent cursor-pointer transition">
-                  <a>Terms & Conditions</a>
+                <li className="hover:text-accent cursor-pointer">
+                  <a onClick={()=> navigate("/privacy")}>Privacy Policy</a>
                 </li>
-                <li className="hover:text-accent cursor-pointer transition">
-                  <a>Privacy Policy</a>
-                </li>
-                <li className="hover:text-accent cursor-pointer transition">
-                  Contact
-                </li>
+                <li className="hover:text-accent cursor-pointer"><a onClick={()=> navigate("/contact")}>Contact</a></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-semibold mb-4">Follow Us</h4>
-              <div className="flex gap-4 justify-center sm:justify-start text-m">
-                <a
-                  href="#"
-                  className="hover:text-accent cursor-pointer transition"
-                >
-                  Facebook
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-accent cursor-pointer transition"
-                >
-                  Twitter
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-accent cursor-pointer transition"
-                >
-                  Instagram
-                </a>
+              <div className="flex gap-4">
+                <a className="hover:text-accent cursor-pointer">Facebook</a>
+                <a className="hover:text-accent cursor-pointer">Twitter</a>
+                <a className="hover:text-accent cursor-pointer">Instagram</a>
               </div>
             </div>
+
           </div>
 
-          {/* Divider */}
-          <div className="border-t border-secondary/20 mt-8 pt-6 text-center text-secondary/60 text-sm">
-            © {new Date().getFullYear()} Your Brand Name. All rights reserved.
+          <div className="border-t border-primary/20 mt-10 pt-6 text-center text-primary text-sm">
+            © {new Date().getFullYear()} Beauty Shop. All rights reserved.
           </div>
-        </div>
-      </footer>
+
+        </footer>
     </div>
   );
 }

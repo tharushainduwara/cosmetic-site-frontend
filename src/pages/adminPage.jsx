@@ -15,6 +15,8 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Loader } from "../components/loader";
 import AdminUsersPage from "./admin/usersPage";
+import AdminContactPage from "./admin/adminContactPage";
+import AdminDashboardPage from "./admin/adminDashboardPage";
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -100,6 +102,10 @@ export default function AdminPage() {
             <HiOutlineUsers className="text-xl" />
             Users
           </Link>
+          <Link to="/admin/messages" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap hover:bg-accent/20">
+            <HiOutlineUsers className="text-xl" />
+            Messages
+          </Link>
         </div>
       </div>
 
@@ -115,12 +121,13 @@ export default function AdminPage() {
       <div className="sm:w-[calc(100%-350px)] w-full h-full sm:h-full border-[3px] border-accent rounded-[20px] overflow-hidden mt-2 sm:mt-0">
         <div className="w-full max-w-full h-full max-h-full overflow-y-scroll">
           {userLoaded?<Routes path="/">
-            <Route path="/" element={<h1>Dashboard</h1>} />
+            <Route path="/" element={<AdminDashboardPage/>} />
             <Route path="/products" element={<AdminProductPage />} />
             <Route path="/orders" element={<AdminOrdersPage/>} />
             <Route path="/add-product" element={<AddProductPage />} />
             <Route path="/update-product" element={<UpdateProductPage />} />
-             <Route path="/users" element={<AdminUsersPage />} />
+            <Route path="/users" element={<AdminUsersPage />} />
+            <Route path="/messages" element={<AdminContactPage />} />
           </Routes>:<Loader/>}
         </div>
       </div>
