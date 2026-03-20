@@ -1,16 +1,50 @@
-# React + Vite
+# 💄 Cosmetic Site - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React Version](https://img.shields.io/badge/react-18.x-blue)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/vite-latest-646CFF)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/tailwind-3.x-38B2AC)](https://tailwindcss.com/)
 
-Currently, two official plugins are available:
+This is the modern, responsive user interface for the **Cosmetic Site**, built with **React**. It features a clean design, seamless navigation, and real-time interaction with the [Cosmetic Site Backend](https://github.com/tharushainduwara/cosmetic-site-backend.git).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Responsive Design:** Fully optimized for Mobile, Tablet, and Desktop views.
+* **Product Showcase:** Dynamic grid layout for browsing beauty and cosmetic products.
+* **User Authentication:** Integrated Login/Signup forms with persistent session handling.
+* **Product Filtering:** Interactive category and search filters to find specific items.
+* **Shopping Cart:** Real-time cart management (Add, Remove, Update quantities).
+* **Toast Notifications:** Instant feedback for user actions (Success, Error, Info).
+* **Secure API Integration:** Connected to a RESTful Node.js/Express backend.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+* **Library:** React.js
+* **Styling:** Tailwind CSS / CSS Modules
+* **Routing:** React Router DOM
+* **State Management:** Context API (or Redux if applicable)
+* **HTTP Client:** Axios / Fetch API
+* **Build Tool:** Vite / Create React App
+
+---
+
+## 📂 Project Structure
+
+```text
+├── public/             # Static assets (images, icons)
+├── src/
+│   ├── assets/         # Project-specific images/styles
+│   ├── components/     # Reusable UI components (Navbar, Footer, ProductCard)
+│   ├── context/        # State management (AuthContext, CartContext)
+│   ├── hooks/          # Custom React hooks
+│   ├── pages/          # Main views (Home, Login, ProductDetails, Cart)
+│   ├── services/       # API calling functions (Axios instances)
+│   ├── utils/          # Helper functions and constants
+│   ├── App.jsx         # Main application component
+│   └── main.jsx        # Entry point
+├── .env                # Environment variables
+└── package.json        # Dependencies and scripts
+
