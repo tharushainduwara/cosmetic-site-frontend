@@ -1,5 +1,5 @@
-# 💄 Cosmetic Site - Frontend
 
+# 💄 Cosmetic Site - Frontend
 [![React Version](https://img.shields.io/badge/react-18.x-blue)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/vite-latest-646CFF)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/tailwind-3.x-38B2AC)](https://tailwindcss.com/)
@@ -17,6 +17,22 @@ This is the modern, responsive user interface for the **Cosmetic Site**, built w
 * **Shopping Cart:** Real-time cart management (Add, Remove, Update quantities).
 * **Toast Notifications:** Instant feedback for user actions (Success, Error, Info).
 * **Secure API Integration:** Connected to a RESTful Node.js/Express backend.
+
+---
+
+## 🖼️ Screenshots
+
+### 🏠 Home Page
+![Home Page](Home_Preview.png)
+
+### 🛍️ Products Page
+![Products Page](Products_Preview.png)
+
+### 🔐 Login Page
+![Login Page](Login_Preview.png)
+
+### 📝 Sign Up Page
+![Sign Up Page](Sign_Up_Preview.png)
 
 ---
 
@@ -47,4 +63,4 @@ This is the modern, responsive user interface for the **Cosmetic Site**, built w
 │   └── main.jsx        # Entry point
 ├── .env                # Environment variables
 └── package.json        # Dependencies and scripts
-
+```
