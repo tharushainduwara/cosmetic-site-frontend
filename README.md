@@ -23,16 +23,16 @@ This is the modern, responsive user interface for the **Cosmetic Site**, built w
 ## 🖼️ Screenshots
 
 ### 🏠 Home Page
-![Home Page](Home_Preview.png)
+![Home Page](Home Preview.png)
 
 ### 🛍️ Products Page
-![Products Page](Products_Preview.png)
+![Products Page](Products Preview.png)
 
 ### 🔐 Login Page
-![Login Page](Login_Preview.png)
+![Login Page](Login Preview.png)
 
 ### 📝 Sign Up Page
-![Sign Up Page](Sign_Up_Preview.png)
+![Sign Up Page](Sign Up Preview.png)
 
 ---
 
