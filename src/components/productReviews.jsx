@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+const API = import.meta.env.VITE_BACKEND_URL || "https://cosmetic-site-backend-1.onrender.com";
 
 function StarDisplay({ rating, size = 18 }) {
   return (
@@ -12,8 +12,8 @@ function StarDisplay({ rating, size = 18 }) {
           width={size}
           height={size}
           viewBox="0 0 24 24"
-          fill={star <= rating ? "#A33A3A" : "none"}
-          stroke={star <= rating ? "#A33A3A" : "#ccc"}
+          fill={star <= rating ? "#ffd900" : "none"}
+          stroke={star <= rating ? "#ffd900" : "#ccc"}
           strokeWidth="1.5"
         >
           <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
@@ -41,8 +41,8 @@ function StarInput({ value, onChange }) {
             width="28"
             height="28"
             viewBox="0 0 24 24"
-            fill={star <= (hovered || value) ? "#A33A3A" : "none"}
-            stroke={star <= (hovered || value) ? "#A33A3A" : "#bbb"}
+            fill={star <= (hovered || value) ? "#ffd900" : "none"}
+            stroke={star <= (hovered || value) ? "#ffd900" : "#bbb"}
             strokeWidth="1.5"
             style={{ transition: "fill 0.15s, stroke 0.15s" }}
           >
@@ -59,7 +59,7 @@ function RatingBar({ label, count, total }) {
   return (
     <div className="flex items-center gap-2 text-sm">
       <span className="w-4 text-right text-[#A33A3A] font-medium">{label}</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="#A33A3A" stroke="#A33A3A" strokeWidth="1.5">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd900" stroke="#ffd900" strokeWidth="1.5">
         <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
       </svg>
       <div className="flex-1 h-2 rounded-full bg-gray-200 overflow-hidden">

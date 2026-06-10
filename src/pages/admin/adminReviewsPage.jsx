@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+const API = import.meta.env.VITE_BACKEND_URL || "https://cosmetic-site-backend-1.onrender.com";
 
 function StarDisplay({ rating }) {
   return (
