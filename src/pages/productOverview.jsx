@@ -42,8 +42,7 @@ export default function ProductOverview() {
       )}
 
       {status == "success" && (
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
-          <ProductReviews productID={product.productID} />
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col gap-8">
           <div
             className="w-full flex flex-col lg:flex-row gap-8
                        rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl
@@ -167,8 +166,12 @@ export default function ProductOverview() {
               </p>
             </div>
           </div>
+
+          {/* Reviews Section */}
+          <ProductReviews productID={product.productID} />
         </div>
       )}
+          
 
       {status == "error" && (
         <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 py-16">

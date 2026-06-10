@@ -132,10 +132,11 @@ export default function ProductReviews({ productID }) {
       });
       const data = await res.json();
       if (res.ok) {
-        toast.success("Review submitted! It will appear after approval.");
+        toast.success("Review submitted successfully!");
         setRating(0);
         setComment("");
         setShowForm(false);
+        fetchReviews();
       } else {
         toast.error(data.message || "Failed to submit");
       }
