@@ -7,6 +7,7 @@ import ImageSlider from "../components/imageSlider";
 import { addToCart} from "../utils/cart";
 import SubscribeForm from "../components/subscribeForm";
 import Footer from "../components/footer";
+import ProductReviews from "../components/productReviews";
 
 export default function ProductOverview() {
   const params = useParams();
@@ -42,6 +43,7 @@ export default function ProductOverview() {
 
       {status == "success" && (
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
+          <ProductReviews productID={product.productID} />
           <div
             className="w-full flex flex-col lg:flex-row gap-8
                        rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl

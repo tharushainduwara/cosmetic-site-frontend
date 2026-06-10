@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { IoBarChartOutline } from "react-icons/io5";
+import { IoBarChartOutline, IoStarOutline } from "react-icons/io5";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { BiBox } from "react-icons/bi";
 import { HiOutlineUsers } from "react-icons/hi";
@@ -17,6 +17,7 @@ import { Loader } from "../components/loader";
 import AdminUsersPage from "./admin/usersPage";
 import AdminContactPage from "./admin/adminContactPage";
 import AdminDashboardPage from "./admin/adminDashboardPage";
+import AdminReviewsPage from "./admin/adminReviewsPage";
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -106,6 +107,10 @@ export default function AdminPage() {
             <HiOutlineUsers className="text-xl" />
             Messages
           </Link>
+          <Link to="/admin/reviews" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap hover:bg-accent/20">
+            <IoStarOutline className="text-xl" />
+            Reviews
+          </Link>
         </div>
       </div>
 
@@ -128,6 +133,7 @@ export default function AdminPage() {
             <Route path="/update-product" element={<UpdateProductPage />} />
             <Route path="/users" element={<AdminUsersPage />} />
             <Route path="/messages" element={<AdminContactPage />} />
+            <Route path="/reviews" element={<AdminReviewsPage />} />
           </Routes>:<Loader/>}
         </div>
       </div>
